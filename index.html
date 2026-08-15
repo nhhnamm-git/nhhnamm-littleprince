@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoàng Tử Bé × Cá Voi 52Hz — Hai Thế Giới</title>
+<meta name="description" content="Một cuốn sách cổ tích kỹ thuật số: Hoàng Tử Bé giữa các vì sao, và Cá Voi 52Hz giữa đại dương sâu thẳm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   0. RESET + FONT-SCALE SYSTEM + DESIGN TOKENS
+   Premium Cartoon Storybook — two worlds, one shared token system
+   ========================================================================== */
+*,*::before,*::after{box-sizing:border-box;}
+:root{
+  --font-scale:1;
+  --dur-fast:260ms;
+  --dur-med:620ms;
+  --dur-slow:900ms;
+  --dur-cinematic:1800ms;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-pop:cubic-bezier(.34,1.56,.64,1);
+  --ease-soft:cubic-bezier(.16,.8,.24,1);
+
+  --radius-s:14px;
+  --radius-m:22px;
+  --radius-l:34px;
+  --radius-xl:46px;
+
+  --space-xs:.4rem;
+  --space-sm:.8rem;
+  --space-md:1.4rem;
+  --space-lg:2.4rem;
+  --space-xl:4.4rem;
+
+  /* Hoàng tử bé — cosmic cartoon palette */
+  --prince-bg-0:#0a0722;
+  --prince-bg-1:#171041;
+  --prince-bg-2:#241a5c;
+  --prince-gold:#ffcf6b;
+  --prince-gold-deep:#e79c3c;
+  --prince-violet:#9b86ff;
+  --prince-rose:#ff7d9b;
+  --prince-ink:#fff4e2;
+
+  /* Cá voi 52Hz — deep sea cartoon palette */
+  --whale-bg-0:#020e14;
+  --whale-bg-1:#053442;
+  --whale-bg-2:#0a5164;
+  --whale-cyan:#5fe9df;
+  --whale-cyan-deep:#2ba9a2;
+  --whale-coral:#ff9b76;
+  --whale-ink:#e6fbf8;
+
+  --shadow-soft:0 14px 34px rgba(6,4,20,.35);
+  --shadow-deep:0 26px 70px rgba(2,1,10,.55);
+
+  /* Typography — Montserrat everywhere */
+  --font-main:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+html{
+  font-size:calc(16px * var(--font-scale));
+  scroll-behavior:smooth;
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}
+}
+/* Performance guard: freeze decorative background animation while the tab isn't visible */
+body.tab-hidden #magic-background *{animation-play-state:paused !important;}
+body{
+  margin:0;
+  font-family:var(--font-main);
+  font-weight:400;
+  line-height:1.6;
+  background:#05040a;
+  color:#eae6f2;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+h1,h2,h3,h4{font-family:var(--font-main);font-weight:700;line-height:1.25;margin:0;letter-spacing:-.01em;}
+p{margin:0;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;}
+button:active{transform:scale(.96);transition:transform 90ms var(--ease);}
+a{color:inherit;}
+::selection{background:rgba(255,207,107,.35);}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.skip-link{position:absolute;left:-999px;top:0;background:#ffcf6b;color:#141225;padding:.6em 1.2em;border-radius:0 0 12px 0;z-index:9999;font-family:var(--font-main);font-weight:700;}
+.skip-link:focus{left:0;}
+
+/* Global: no underline anywhere on tabs/nav links — required upgrade rule */
+.world-tab,
+.world-tab *,
+.subnav,
+.subnav a,
+.subnav a *,
+nav a,
+nav button,
+a{
+  text-decoration:none !important;
+}
+
+/* Focus visibility — accessibility */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible,input:focus-visible{
+  outline:3px solid #ffe6a8;outline-offset:3px;border-radius:6px;
+}
+.theme-whale a:focus-visible,.theme-whale button:focus-visible{outline-color:#a8f5ef;}
+
+/* ==========================================================================
+   1. MAGIC BACKGROUND LAYERS — cartoon cosmos / cartoon deep sea
+   ========================================================================== */
+#magic-background{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  transition:background var(--dur-slow) var(--ease);
+  background:
+    radial-gradient(60% 40% at 18% -6%,rgba(155,134,255,.35),transparent 60%),
+    radial-gradient(50% 36% at 88% 6%,rgba(255,207,107,.14),transparent 60%),
+    radial-gradient(120% 90% at 50% 118%,#241a5c 0%,#130e38 46%,var(--prince-bg-0) 100%);
+}
+body.theme-whale #magic-background{
+  background:
+    radial-gradient(55% 40% at 80% -4%,rgba(95,233,223,.22),transparent 62%),
+    radial-gradient(60% 45% at 10% 4%,rgba(255,155,118,.10),transparent 60%),
+    radial-gradient(120% 95% at 50% 120%,#0a5164 0%,#053442 45%,var(--whale-bg-0) 100%);
+}
+
+/* -- cartoon cosmos: soft nebula clouds + planets + stars -- */
+.bg-stars{position:absolute;inset:0;overflow:hidden;opacity:1;transition:opacity var(--dur-slow) var(--ease);}
+.bg-stars::before{
+  content:"";position:absolute;inset:-10%;
+  background:
+    radial-gradient(120px 90px at 12% 18%,rgba(255,207,107,.16),transparent 70%),
+    radial-gradient(160px 120px at 82% 12%,rgba(155,134,255,.20),transparent 70%),
+    radial-gradient(140px 100px at 70% 78%,rgba(255,125,155,.12),transparent 70%);
+  filter:blur(2px);
+  animation:nebula-drift 26s ease-in-out infinite alternate;
+}
+@keyframes nebula-drift{0%{transform:translate3d(0,0,0) scale(1);}100%{transform:translate3d(-2%,1.5%,0) scale(1.04);}}
+.bg-stars::after{
+  content:"";position:absolute;right:6%;top:10%;width:64px;height:64px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,#fff6da,#ffcf6b 45%,#c9822f 82%);
+  box-shadow:0 0 40px 6px rgba(255,207,107,.35), inset -10px -8px 0 rgba(0,0,0,.18);
+  animation:moon-bob 7s ease-in-out infinite;
+}
+@keyframes moon-bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.star{position:absolute;background:#fff;border-radius:50%;opacity:.75;animation:twinkle 4.5s ease-in-out infinite;box-shadow:0 0 6px 1px rgba(255,255,255,.6);}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.85);}50%{opacity:1;transform:scale(1.15);}}
+body.theme-whale .bg-stars{opacity:0;}
+
+/* ==========================================================================
+   1b. COSMIC EFFECTS — three-tier star system + shooting stars
+   ========================================================================== */
+.star-sm{opacity:.55;}
+.star-md{box-shadow:0 0 6px 1px rgba(255,255,255,.65),0 0 14px rgba(255,255,255,.25);}
+.star-glyph{
+  position:absolute;background:none;border-radius:0;color:#fff9e8;line-height:1;
+  font-size:1em;animation:twinkle 5.5s ease-in-out infinite;
+  text-shadow:0 0 6px rgba(255,244,220,.8),0 0 18px rgba(255,207,107,.5),0 0 32px rgba(255,207,107,.25);
+}
+.shooting-star{
+  position:absolute;width:140px;height:2px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5) 45%,#fff);
+  border-radius:2px;transform-origin:right center;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,.8));
+  animation:shooting-fly 1.6s linear forwards;
+}
+.shooting-star::after{
+  content:"";position:absolute;right:0;top:50%;width:6px;height:6px;transform:translateY(-50%);
+  border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(255,255,255,.9);
+}
+@keyframes shooting-fly{
+  0%{transform:translate(0,0) rotate(-35deg) scaleX(0);opacity:0;}
+  10%{transform:translate(50px,35px) rotate(-35deg) scaleX(1);opacity:1;}
+  85%{opacity:1;}
+  100%{transform:translate(620px,434px) rotate(-35deg) scaleX(1);opacity:0;}
+}
+body.theme-whale .shooting-star{background:linear-gradient(90deg,transparent,rgba(200,253,247,.5) 45%,#c9fdf7);filter:drop-shadow(0 0 6px rgba(200,253,247,.8));}
+body.theme-whale .shooting-star::after{background:#c9fdf7;box-shadow:0 0 10px 3px rgba(95,233,223,.9);}
+
+/* -- cartoon deep sea: light shafts + drifting silhouettes + bubbles -- */
+.bg-ocean{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity var(--dur-slow) var(--ease);}
+body.theme-whale .bg-ocean{opacity:1;}
+.bg-ocean::before, .bg-ocean::after{
+  content:"";position:absolute;inset:-20%;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(130,245,238,.045) 30%, transparent 50%),
+    repeating-linear-gradient(100deg, rgba(160,245,238,.07) 0 3px, transparent 3px 120px),
+    repeating-linear-gradient(70deg, rgba(160,245,238,.05) 0 3px, transparent 3px 160px);
+  animation:rays-drift 26s linear infinite;
+  mix-blend-mode:screen;
+}
+.bg-ocean::after{animation-duration:34s;animation-direction:reverse;opacity:.6;}
+@keyframes rays-drift{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(-6%) rotate(1deg);}}
+.bubble{
+  position:absolute;bottom:-5%;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.7),rgba(200,250,245,.18) 45%,rgba(150,230,225,.04) 75%);
+  box-shadow:inset 0 0 6px rgba(255,255,255,.35),inset -3px -3px 4px rgba(3,25,34,.25),0 0 6px rgba(160,245,238,.15);
+  filter:blur(.3px);
+  animation:bubble-rise linear infinite;
+}
+@keyframes bubble-rise{0%{transform:translateY(0) translateX(0);opacity:0;}10%{opacity:1;}90%{opacity:.8;}100%{transform:translateY(-115vh) translateX(20px);opacity:0;}}
+
+/* Giant whale silhouette, drawn in pure CSS — drifts slowly through the deep
+   background, mostly hidden beneath the content and fog rather than a photo. */
+.ocean-whale{
+  position:absolute;left:-30%;top:38%;width:56vw;max-width:820px;min-width:420px;aspect-ratio:5/2;
+  opacity:.16;filter:blur(1.5px);
+  animation:whale-drift 42s linear infinite;
+  pointer-events:none;
+}
+.ocean-whale::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(60% 80% at 38% 45%,rgba(120,210,205,.9),rgba(30,90,100,.55) 60%,transparent 85%);
+  border-radius:50% 45% 45% 55%/60% 60% 40% 40%;
+}
+.ocean-whale::after{
+  content:"";position:absolute;right:2%;top:18%;width:22%;height:60%;
+  background:radial-gradient(60% 80% at 30% 50%,rgba(120,210,205,.85),transparent 80%);
+  clip-path:polygon(0 20%,100% 0,80% 50%,100% 100%,0 80%);
+}
+@keyframes whale-drift{
+  0%{transform:translateX(0) translateY(0);opacity:.1;}
+  15%{opacity:.2;}
+  50%{transform:translateX(46vw) translateY(-4%);opacity:.16;}
+  85%{opacity:.08;}
+  100%{transform:translateX(96vw) translateY(2%);opacity:0;}
+}
+
+/* ==========================================================================
+   1c. OCEAN EFFECTS — caustics, bioluminescent plankton, whale watermark photo
+   ========================================================================== */
+.ocean-caustics{position:absolute;inset:0;overflow:hidden;mix-blend-mode:screen;opacity:.42;}
+.ocean-caustics::before,.ocean-caustics::after{
+  content:"";position:absolute;inset:-30%;
+  background:
+    repeating-radial-gradient(circle at 30% 20%,rgba(160,245,238,.09) 0 2px,transparent 3px 46px),
+    repeating-radial-gradient(circle at 70% 60%,rgba(95,233,223,.07) 0 2px,transparent 3px 60px);
+  animation:caustics-shift 34s ease-in-out infinite alternate;
+  filter:blur(.5px);
+}
+.ocean-caustics::after{animation-duration:44s;animation-direction:alternate-reverse;opacity:.6;inset:-40%;}
+@keyframes caustics-shift{0%{transform:translate3d(0,0,0) scale(1);}100%{transform:translate3d(3%,-2%,0) scale(1.05);}}
+
+/* Bioluminescent plankton — tiny magical cyan/aqua dust the JS scatters through the deep */
+.plankton{position:absolute;border-radius:50%;background:radial-gradient(circle,#c9fdf7,rgba(95,233,223,.15) 60%,transparent 75%);
+  box-shadow:0 0 6px 1px rgba(95,233,223,.35);
+  animation:plankton-glow ease-in-out infinite;pointer-events:none;}
+@keyframes plankton-glow{
+  0%,100%{opacity:0;transform:translate3d(0,0,0) scale(.6);}
+  50%{opacity:.85;transform:translate3d(2px,-3px,0) scale(1);}
+}
+
+/* Whale watermark — a vast, half-imagined shape resting deep beneath the water,
+   not a photo placed on the page. Very faint, blurred, mask-dissolved into the ocean. */
+.whale-watermark{
+  position:absolute;
+  width:min(1000px,90vw);
+  left:50%;top:45%;
+  transform:translate(-50%,-50%);
+  opacity:.08;
+  filter:grayscale(1) brightness(.65) contrast(.85) blur(1px) drop-shadow(0 0 28px rgba(95,233,223,.12));
+  mix-blend-mode:screen;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,#000 35%,rgba(0,0,0,.75) 55%,transparent 85%);
+  mask-image:radial-gradient(ellipse 60% 55% at 50% 50%,#000 35%,rgba(0,0,0,.75) 55%,transparent 85%);
+  animation:whale-watermark-drift 58s ease-in-out infinite alternate;
+  will-change:transform,opacity;
+}
+.whale-watermark img{width:100%;height:auto;object-fit:contain;}
+@keyframes whale-watermark-drift{
+  0%{transform:translate3d(calc(-50% - 2%),calc(-50% + 1%),0) scale(.98);opacity:.055;}
+  50%{transform:translate3d(calc(-50% + 2%),calc(-50% - 1.5%),0) scale(1.02);opacity:.09;}
+  100%{transform:translate3d(calc(-50% - 1%),calc(-50% + 1%),0) scale(1);opacity:.06;}
+}
+@media(max-width:1024px){
+  .whale-watermark{width:min(800px,82vw);opacity:.07;}
+}
+@media(max-width:640px){
+  .whale-watermark{width:min(520px,74vw);opacity:.05;}
+}
+@media(prefers-reduced-motion:reduce){
+  .ocean-caustics::before,.ocean-caustics::after,.whale-watermark,.plankton{animation:none;}
+}
+
+/* Fairy dust particles (Little Prince world) */
+.fairy-dust{position:fixed;z-index:1200;pointer-events:none;width:7px;height:7px;border-radius:50%;
+  background:radial-gradient(circle,#fff 0%,#ffcf6b 55%,transparent 75%);
+  box-shadow:0 0 10px 3px rgba(255,207,107,.85);
+  animation:dust-pop 900ms var(--ease) forwards;}
+@keyframes dust-pop{
+  0%{transform:translate(0,0) scale(1);opacity:1;}
+  100%{transform:translate(var(--dx,0),var(--dy,-40px)) scale(0);opacity:0;}
+}
+
+/* ==========================================================================
+   2. HEADER / WORLD SWITCHER — floating glass storybook nav
+   ========================================================================== */
+.site-header{
+  position:sticky;top:0;z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  padding:.85rem 1rem;
+  backdrop-filter:blur(18px) saturate(150%);
+  background:rgba(10,7,28,.5);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition:background var(--dur-med) var(--ease);
+}
+body.theme-whale .site-header{background:rgba(2,16,22,.55);}
+#world-switcher{
+  display:flex;gap:.4rem;background:rgba(255,255,255,.06);padding:.4rem;border-radius:999px;
+  border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 24px rgba(0,0,0,.3);
+  justify-content:center;
+}
+.world-tab{
+  display:flex;align-items:center;gap:.55em;position:relative;overflow:hidden;isolation:isolate;
+  border:1px solid transparent;background:transparent;color:#d9d3ef;
+  padding:.6em 1.3em;border-radius:999px;
+  font-family:var(--font-main);font-weight:600;font-size:.92rem;letter-spacing:.01em;
+  transition:transform var(--dur-fast) var(--ease-pop),background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease);
+  white-space:nowrap;
+}
+/* aura layer behind each tab — appears on hover/active, never an underline */
+.world-tab::before{
+  content:"";position:absolute;inset:-40%;z-index:-1;border-radius:50%;
+  opacity:0;filter:blur(14px);transition:opacity var(--dur-med) var(--ease);
+}
+#tab-prince::before{background:radial-gradient(circle,rgba(255,207,107,.55),transparent 68%);}
+#tab-whale::before{background:radial-gradient(circle,rgba(95,233,223,.55),transparent 68%);}
+.world-tab:hover::before{opacity:.55;}
+.world-tab[aria-selected="true"]::before{opacity:.85;}
+.world-tab .tab-em{font-size:1.25em;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));transition:transform var(--dur-fast) var(--ease-pop),filter var(--dur-fast) var(--ease);}
+.world-tab:hover .tab-em{transform:translateY(-1px) scale(1.08);filter:drop-shadow(0 0 8px currentColor) drop-shadow(0 2px 3px rgba(0,0,0,.35));}
+.world-tab .tab-sub{display:block;font-size:.68em;opacity:.65;font-weight:400;font-style:italic;font-family:var(--font-main);}
+.world-tab:not([aria-selected="true"]):hover{background:rgba(255,255,255,.1);color:#fff;transform:translateY(-3px) scale(1.015);border-color:rgba(255,255,255,.14);}
+.world-tab[aria-selected="true"]{
+  color:#171225;transform:translateY(-2px) scale(1.03);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), inset 0 -6px 10px rgba(0,0,0,.12);
+}
+#tab-prince[aria-selected="true"]{
+  background:linear-gradient(135deg,#ffe6a8,#ffcf6b 55%,#e79c3c);
+  border-color:rgba(255,230,168,.9);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), inset 0 -6px 10px rgba(0,0,0,.12), 0 0 26px 3px rgba(255,207,107,.55), 0 6px 16px rgba(0,0,0,.35);
+}
+#tab-whale[aria-selected="true"]{
+  background:linear-gradient(135deg,#c9fdf7,#5fe9df 55%,#2ba9a2);
+  border-color:rgba(201,253,247,.9);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55), inset 0 -6px 10px rgba(0,0,0,.12), 0 0 26px 3px rgba(95,233,223,.5), 0 6px 16px rgba(0,0,0,.35);
+}
+
+/* ==========================================================================
+   3. LAYOUT SHELL / WORLD SECTIONS
+   ========================================================================== */
+main{position:relative;z-index:2;}
+.world{display:none;}
+.world.is-active{display:block;}
+.world-enter{animation:page-open var(--dur-med) var(--ease) both;}
+@keyframes page-open{
+  0%{opacity:0;transform:scale(.97) translateY(14px);filter:blur(8px);}
+  100%{opacity:1;transform:scale(1) translateY(0);filter:blur(0);}
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.4rem;}
+.section{padding:5.5rem 0;position:relative;}
+.section-head{max-width:720px;margin:0 auto 2.8rem;text-align:center;}
+.section-kicker{font-family:var(--font-main);font-weight:600;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-bottom:.6rem;display:inline-block;padding:.25em .9em;border-radius:999px;background:rgba(255,255,255,.06);}
+.section-title{font-size:clamp(1.8rem,3.4vw,2.7rem);margin-bottom:.7rem;}
+.section-desc{font-size:1.05rem;line-height:1.8;opacity:.85;}
+
+/* Little Prince palette */
+#world-little-prince{color:var(--prince-ink);}
+#world-little-prince .section-kicker{color:var(--prince-gold);}
+#world-little-prince .accent{color:var(--prince-gold);}
+#world-little-prince .card,
+#world-little-prince .accordion-item{
+  background:linear-gradient(160deg,rgba(36,26,92,.68),rgba(18,14,50,.8));
+  border:1px solid rgba(255,207,107,.2);
+}
+
+/* Whale palette */
+#world-whale-52hz{color:var(--whale-ink);}
+#world-whale-52hz .section-kicker{color:var(--whale-cyan);}
+#world-whale-52hz .accent{color:var(--whale-cyan);}
+#world-whale-52hz .card,
+#world-whale-52hz .accordion-item{
+  background:linear-gradient(160deg,rgba(8,52,64,.68),rgba(3,22,29,.82));
+  border:1px solid rgba(95,233,223,.2);
+}
+
+/* ==========================================================================
+   4. HERO — cartoon cosmic scene / cartoon deep-sea scene
+   Real photos are visually retired here: the <img> is kept in the DOM for
+   the app's image-manager script, but hidden, and a pure CSS/SVG-style
+   illustrated scene takes its place.
+   ========================================================================== */
+.hero{
+  min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;position:relative;padding:6rem 1.2rem 4rem;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:-1;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0;visibility:hidden;display:none;}
+.hero-bg .overlay{position:absolute;inset:0;}
+#world-little-prince .hero-bg{
+  background:
+    radial-gradient(60% 55% at 50% 100%,rgba(255,207,107,.14),transparent 70%),
+    radial-gradient(38% 30% at 78% 20%,rgba(255,125,155,.10),transparent 70%),
+    radial-gradient(46% 34% at 16% 26%,rgba(155,134,255,.22),transparent 70%);
+}
+#world-little-prince .hero-bg::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%,#fff,transparent),
+    radial-gradient(2px 2px at 24% 55%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 38% 12%,#fff,transparent),
+    radial-gradient(2px 2px at 55% 70%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 68% 30%,#fff,transparent),
+    radial-gradient(2px 2px at 82% 60%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 92% 22%,#fff,transparent),
+    radial-gradient(2px 2px at 15% 82%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 46% 90%,#fff,transparent);
+  opacity:.85;animation:twinkle 5s ease-in-out infinite;
+}
+#world-little-prince .hero-bg .overlay{background:radial-gradient(ellipse at 50% 30%,rgba(23,16,65,.2),rgba(10,7,34,.94) 78%);}
+#world-whale-52hz .hero-bg{
+  background:
+    linear-gradient(180deg,rgba(95,233,223,.14) 0%,transparent 30%),
+    radial-gradient(60% 45% at 50% 10%,rgba(95,233,223,.18),transparent 65%),
+    radial-gradient(50% 40% at 20% 80%,rgba(255,155,118,.08),transparent 65%);
+}
+#world-whale-52hz .hero-bg .overlay{background:radial-gradient(ellipse at 50% 40%,rgba(6,42,52,.28),rgba(2,14,19,.95) 80%);}
+.hero-eyebrow{font-family:var(--font-main);font-weight:600;letter-spacing:.28em;text-transform:uppercase;font-size:.78rem;opacity:.8;margin-bottom:1.4rem;}
+.hero-title{font-size:clamp(2.7rem,8vw,5.6rem);line-height:1.05;font-weight:700;margin-bottom:1.3rem;}
+#world-little-prince .hero-title{
+  background:linear-gradient(135deg,#fff6e0,#ffcf6b 45%,#e79c3c);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 34px rgba(255,207,107,.4));
+}
+#world-whale-52hz .hero-title{
+  background:linear-gradient(135deg,#eafffe,#5fe9df 45%,#2ba9a2);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 34px rgba(95,233,223,.4));
+}
+.hero-freq{font-family:var(--font-main);font-weight:600;font-weight:700;font-size:clamp(1.2rem,2.4vw,1.6rem);letter-spacing:.06em;color:var(--whale-cyan);margin-bottom:.6rem;}
+.hero-lede{max-width:640px;font-size:1.2rem;line-height:1.85;opacity:.92;margin-bottom:1.6rem;}
+.hero-byline{font-style:italic;opacity:.68;font-size:1.02rem;margin-bottom:2.4rem;}
+.hero-scene{position:relative;width:100%;max-width:560px;height:200px;margin:0 auto 1.6rem;}
+.hero-waveform{display:flex;align-items:flex-end;justify-content:center;gap:4px;height:70px;margin:0 auto 1.6rem;width:min(500px,80vw);}
+.hero-waveform span{flex:1;background:linear-gradient(180deg,#c9fdf7,#2ba9a2);border-radius:4px;animation:wave-bounce 1.6s ease-in-out infinite;}
+@keyframes wave-bounce{0%,100%{transform:scaleY(.3);}50%{transform:scaleY(1);}}
+.hero-scroll-hint{margin-top:1.6rem;font-family:var(--font-main);font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;opacity:.6;}
+.hero-scroll-hint::after{content:"↓";display:block;margin-top:.4rem;animation:bob 2s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* Character stage — B-612 miniature planet with cartoon Prince, fox, rose
+   Photos hidden; each character is hand-built with gradients/box-shadows so
+   the whole cast shares one illustrated language. */
+.char-stage{position:relative;max-width:860px;margin:0 auto 1.8rem;height:380px;}
+.char-stage .stage-item{position:absolute;text-align:center;font-family:var(--font-main);font-weight:600;font-size:.72rem;letter-spacing:.04em;opacity:.92;transition:transform var(--dur-fast) var(--ease-pop);white-space:nowrap;}
+.char-stage .stage-item:hover{transform:translateY(-4px) scale(1.04);}
+.char-stage .stage-item img{width:86px;height:86px;object-fit:cover;opacity:0;visibility:hidden;display:none;}
+.char-stage .stage-item.small img{width:60px;height:60px;}
+.char-stage .stage-item span{display:block;margin-top:.6rem;text-shadow:0 2px 6px rgba(0,0,0,.55);}
+@keyframes float-slow-centered{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-8px);}}
+
+/* Four characters staggered at different heights/edges so labels never collide */
+.char-stage .cs-prince{left:50%;top:0;transform:translateX(-50%);width:170px;height:170px;animation:float-slow-centered 6s ease-in-out infinite;z-index:3;}
+.char-stage .cs-prince::before{
+  content:"";position:absolute;left:50%;top:14px;transform:translateX(-50%);width:118px;height:118px;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#9fce6f,#5f9e46 55%,#3d7530 85%);
+  box-shadow:inset -14px -12px 0 rgba(0,0,0,.16), 0 14px 28px rgba(0,0,0,.4), 0 0 0 6px rgba(255,207,107,.08);
+}
+.char-stage .cs-prince::after{
+  content:"";position:absolute;left:50%;top:36px;transform:translateX(-50%);width:26px;height:34px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:linear-gradient(180deg,#3f6cd8,#294a9c);
+  box-shadow:0 -20px 0 -6px #f6cf7a, 8px -18px 0 -12px #ff7d9b;
+}
+.char-stage .cs-prince span{position:relative;z-index:2;}
+
+.char-stage .cs-fox{right:2%;top:36%;width:96px;height:78px;z-index:2;}
+.char-stage .cs-fox::before{
+  content:"";position:absolute;left:14px;bottom:10px;width:60px;height:44px;border-radius:50% 50% 46% 46%;
+  background:linear-gradient(160deg,#ffb066,#e8823a);
+  box-shadow:inset -6px -6px 0 rgba(0,0,0,.12);
+}
+.char-stage .cs-fox::after{
+  content:"";position:absolute;left:12px;bottom:44px;width:0;height:0;
+  border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:16px solid #e8823a;
+  box-shadow:38px 0 0 -0px #e8823a;
+}
+.char-stage .cs-fox span{position:relative;z-index:2;}
+
+.char-stage .cs-rose{left:50%;bottom:0;transform:translateX(-50%);width:60px;height:74px;z-index:2;}
+.char-stage .cs-rose::before{
+  content:"";position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:34px;height:30px;border-radius:50% 50% 50% 4%;
+  background:radial-gradient(circle at 35% 30%,#ff9fb4,#ff5c82 60%,#d13f66 90%);
+  box-shadow:0 0 16px 2px rgba(255,125,155,.45);
+}
+.char-stage .cs-rose::after{
+  content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:3px;height:24px;background:#5f9e46;
+}
+.char-stage .cs-rose span{position:relative;z-index:2;}
+
+.char-stage .cs-planet{left:0;top:44%;width:70px;height:70px;z-index:2;}
+.char-stage .cs-planet::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#e6b8ff,#a684e0 55%,#6f52a8 88%);
+  box-shadow:inset -8px -6px 0 rgba(0,0,0,.15), 0 10px 20px rgba(0,0,0,.35);
+  animation:planet-rotate 12s linear infinite;
+}
+@keyframes planet-rotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.char-stage .cs-planet::after{
+  content:"";position:absolute;left:-14%;top:44%;width:128%;height:12px;border-radius:50%;
+  background:rgba(255,255,255,.35);transform:rotate(-12deg);
+}
+.char-stage .cs-planet span{position:relative;z-index:2;}
+
+/* ==========================================================================
+   5. SUB-NAVIGATION (mini nav inside each world)
+   ========================================================================== */
+.subnav{
+  position:sticky;top:58px;z-index:120;
+  display:flex;gap:.5rem;overflow-x:auto;padding:.9rem 1.2rem;
+  background:rgba(10,7,28,.5);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  scrollbar-width:thin;
+  justify-content:center;align-items:center;flex-wrap:wrap;
+}
+body.theme-whale .subnav{background:rgba(2,14,19,.55);}
+.subnav a{
+  flex:0 0 auto;font-family:var(--font-main);font-weight:600;font-size:.85rem;position:relative;overflow:hidden;
+  padding:.6em 1.1em;border-radius:999px;color:#e2ddf3;background:rgba(255,255,255,.06);
+  border:1px solid transparent;white-space:nowrap;transition:transform var(--dur-fast) var(--ease-pop),background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease);
+  min-height:44px;display:inline-flex;align-items:center;
+}
+#world-whale-52hz .subnav a{color:#dcf7f4;}
+#world-little-prince .subnav a:hover,#world-little-prince .subnav a:focus-visible{border-color:rgba(255,207,107,.55);color:var(--prince-gold);background:rgba(255,207,107,.12);transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,207,107,.18);}
+#world-whale-52hz .subnav a:hover,#world-whale-52hz .subnav a:focus-visible{border-color:rgba(95,233,223,.55);color:var(--whale-cyan);background:rgba(95,233,223,.12);transform:translateY(-2px);box-shadow:0 6px 18px rgba(95,233,223,.18);}
+/* active section pill — set by AnimationManager as user scrolls */
+#world-little-prince .subnav a.is-current{color:#171225;background:linear-gradient(135deg,#ffe6a8,#ffcf6b 60%,#e79c3c);border-color:rgba(255,230,168,.9);box-shadow:0 0 18px 2px rgba(255,207,107,.5);}
+#world-whale-52hz .subnav a.is-current{color:#062126;background:linear-gradient(135deg,#c9fdf7,#5fe9df 60%,#2ba9a2);border-color:rgba(201,253,247,.9);box-shadow:0 0 18px 2px rgba(95,233,223,.5);}
+
+@media(max-width:768px){
+  .subnav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;}
+}
+
+/* ==========================================================================
+   6. GRIDS / CARDS — storybook character cards
+   ========================================================================== */
+.grid{display:grid;gap:1.3rem;}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+.grid-auto{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));}
+@media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}}
+
+.card{
+  border-radius:var(--radius-m);padding:1.6rem;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform var(--dur-fast) var(--ease-pop),box-shadow var(--dur-med) var(--ease),border-color var(--dur-fast) var(--ease);
+  text-align:left;width:100%;color:inherit;box-shadow:var(--shadow-soft);
+  transform-style:preserve-3d;will-change:transform;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:4px;
+  background:linear-gradient(90deg,transparent,currentColor,transparent);opacity:0;
+  transition:opacity var(--dur-fast) var(--ease);
+  z-index:2;
+}
+/* shine sweep — a soft diagonal light runs across the card on hover */
+.card::after{
+  content:"";position:absolute;inset:-100%;z-index:1;pointer-events:none;
+  background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.16) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform .9s var(--ease-soft);
+}
+.card:hover::after,.card:focus-visible::after{transform:translateX(60%);}
+.card:hover,.card:focus-visible{transform:translateY(-6px) scale(1.012);}
+.card:hover::before{opacity:.55;}
+.card > *{position:relative;z-index:2;}
+#world-little-prince .card{color:var(--prince-gold);}
+#world-whale-52hz .card{color:var(--whale-cyan);}
+#world-little-prince .card:hover{border-color:rgba(255,207,107,.6);box-shadow:0 22px 54px rgba(0,0,0,.42),0 0 0 1px rgba(255,207,107,.22),0 0 34px rgba(255,207,107,.12);}
+#world-whale-52hz .card:hover{border-color:rgba(95,233,223,.6);box-shadow:0 22px 54px rgba(0,0,0,.42),0 0 0 1px rgba(95,233,223,.22),0 0 34px rgba(95,233,223,.12);}
+.card-eyebrow{font-family:var(--font-main);font-weight:600;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:.5rem;}
+.card h3{font-size:1.4rem;margin-bottom:.5rem;line-height:1.25;font-family:var(--font-main);font-weight:700;color:inherit;transition:filter var(--dur-fast) var(--ease);}
+.card:hover h3{filter:drop-shadow(0 0 10px currentColor);}
+.card p{font-size:.96rem;line-height:1.65;opacity:.85;}
+.card-icon{font-size:1.9rem;margin-bottom:.6rem;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));transition:transform var(--dur-med) var(--ease);}
+.card:hover .card-icon{transform:translateY(-3px);}
+.card-foot{margin-top:1rem;font-family:var(--font-main);font-weight:600;font-size:.78rem;opacity:.65;display:flex;justify-content:space-between;align-items:center;}
+
+.badge{display:inline-block;font-family:var(--font-main);font-weight:600;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.3em .75em;border-radius:999px;}
+.badge-fact{background:rgba(95,233,223,.16);color:#a8f5ef;border:1px solid rgba(95,233,223,.4);}
+.badge-interpretation{background:rgba(255,207,107,.16);color:var(--prince-gold);border:1px solid rgba(255,207,107,.4);}
+.badge-story{background:rgba(255,125,155,.18);color:#ffb0c2;border:1px solid rgba(255,125,155,.42);}
+
+/* ==========================================================================
+   7. IMAGES / GALLERY — storybook illustrated plate treatment
+   Any image loaded dynamically by the app (facts/gallery/ocean grids) is
+   toned into the cartoon palette instead of reading as a stock photo.
+   ========================================================================== */
+.img-wrap{position:relative;border-radius:var(--radius-m);overflow:hidden;background:linear-gradient(135deg,#2a2050,#140f30);aspect-ratio:4/3;box-shadow:var(--shadow-soft);border:3px solid rgba(255,255,255,.08);}
+#world-whale-52hz .img-wrap{background:linear-gradient(135deg,#0a4453,#03181f);}
+.img-wrap img{
+  width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);
+  filter:saturate(1.25) contrast(1.06) brightness(.94);
+}
+#world-little-prince .img-wrap img{filter:saturate(1.3) contrast(1.08) brightness(.92) sepia(.12) hue-rotate(-8deg);}
+#world-whale-52hz .img-wrap img{filter:saturate(1.2) contrast(1.08) brightness(.9) hue-rotate(6deg);}
+.img-wrap::after{
+  content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;
+  background:radial-gradient(120% 100% at 30% 0%,rgba(255,255,255,.18),transparent 55%),
+             radial-gradient(120% 100% at 100% 100%,rgba(0,0,0,.5),transparent 55%);
+}
+#world-little-prince .img-wrap::after{box-shadow:inset 0 0 0 9999px rgba(155,134,255,.06);}
+#world-whale-52hz .img-wrap::after{box-shadow:inset 0 0 0 9999px rgba(95,233,223,.07);}
+.img-wrap:hover img{transform:scale(1.06);}
+.img-wrap .cap{position:absolute;left:0;right:0;bottom:0;padding:1rem .9rem .8rem;
+  background:linear-gradient(0deg,rgba(0,0,0,.8),transparent);font-family:var(--font-main);font-weight:600;font-size:.8rem;color:#fff;z-index:2;}
+.img-wrap.placeholder{display:flex;align-items:center;justify-content:center;font-size:2.6rem;}
+
+/* ==========================================================================
+   8. STORY MODAL — cinematic story panel
+   ========================================================================== */
+#global-modal-root{position:fixed;inset:0;z-index:2000;display:none;}
+#global-modal-root.is-open{display:block;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(2,2,10,.85);backdrop-filter:blur(8px);animation:fade-in var(--dur-fast) var(--ease);}
+@keyframes fade-in{from{opacity:0;}to{opacity:1;}}
+.modal-shell{position:relative;z-index:2;max-width:760px;margin:4vh auto;max-height:92vh;overflow-y:auto;
+  border-radius:var(--radius-l);padding:2.6rem 2.3rem 2.3rem;
+  animation:modal-in var(--dur-med) var(--ease);
+}
+@keyframes modal-in{0%{opacity:0;transform:translateY(34px) scale(.95);filter:blur(6px);}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
+#world-little-prince ~ #global-modal-root .modal-shell,
+.modal-shell.theme-prince{
+  background:
+    radial-gradient(70% 50% at 85% -10%,rgba(255,207,107,.12),transparent 60%),
+    radial-gradient(60% 40% at 10% 110%,rgba(155,134,255,.14),transparent 60%),
+    linear-gradient(165deg,#221a52,#120d34);
+  border:1px solid rgba(255,207,107,.32);box-shadow:0 34px 100px rgba(0,0,0,.6),0 0 70px rgba(255,207,107,.1);
+}
+.modal-shell.theme-whale{
+  background:
+    radial-gradient(70% 50% at 85% -10%,rgba(95,233,223,.14),transparent 60%),
+    radial-gradient(60% 40% at 10% 110%,rgba(255,155,118,.08),transparent 60%),
+    linear-gradient(165deg,#063b48,#02171f);
+  border:1px solid rgba(95,233,223,.32);box-shadow:0 34px 100px rgba(0,0,0,.6),0 0 70px rgba(95,233,223,.1);
+}
+@media(max-width:600px){.modal-shell{margin:0;max-height:100vh;border-radius:0;padding:1.7rem 1.3rem 2rem;}}
+.modal-close{position:absolute;top:1rem;right:1rem;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff;font-size:1.2rem;line-height:1;display:flex;align-items:center;justify-content:center;transition:transform var(--dur-fast) var(--ease-pop),background var(--dur-fast);}
+.modal-close:hover{background:rgba(255,255,255,.18);transform:scale(1.08) rotate(90deg);}
+.modal-eyebrow{font-family:var(--font-main);font-weight:600;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-bottom:.6rem;}
+.modal-title{font-size:2rem;margin-bottom:.3rem;line-height:1.2;}
+.modal-sub{opacity:.72;font-style:italic;margin-bottom:1.3rem;}
+.modal-body p{line-height:1.85;font-size:1.02rem;margin-bottom:1rem;opacity:.94;}
+.modal-body h4{font-family:var(--font-main);font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin:1.3rem 0 .5rem;}
+.modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.4rem;}
+.tag{font-family:var(--font-main);font-weight:600;font-size:.78rem;padding:.32em .75em;border-radius:999px;background:rgba(255,255,255,.09);}
+.modal-quote{border-left:3px solid rgba(255,207,107,.65);padding-left:1rem;font-style:italic;opacity:.92;margin:1rem 0;}
+.theme-whale .modal-quote{border-left-color:rgba(95,233,223,.65);}
+.modal-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.1);}
+.nav-btn{font-family:var(--font-main);font-weight:600;font-size:.85rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:inherit;padding:.6em 1.2em;border-radius:999px;transition:background var(--dur-fast),transform var(--dur-fast) var(--ease-pop),box-shadow var(--dur-fast) var(--ease);min-height:44px;}
+.nav-btn:hover:not(:disabled){background:rgba(255,255,255,.18);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.3);}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed;}
+
+/* ==========================================================================
+   9. ACCORDION (profile / meanings)
+   ========================================================================== */
+.accordion-item{border-radius:var(--radius-m);margin-bottom:.9rem;overflow:hidden;box-shadow:var(--shadow-soft);}
+.accordion-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  background:none;border:none;color:inherit;text-align:left;padding:1.25rem 1.5rem;font-family:var(--font-main);font-weight:700;min-height:44px;}
+.accordion-trigger h3{font-size:1.3rem;}
+.accordion-trigger .sub{font-family:var(--font-main);font-weight:400;font-size:.92rem;opacity:.65;font-style:italic;margin-top:.2rem;}
+.chevron{flex:0 0 auto;width:24px;height:24px;transition:transform var(--dur-fast) var(--ease-pop);opacity:.75;}
+.accordion-trigger[aria-expanded="true"] .chevron{transform:rotate(180deg);}
+.accordion-panel{max-height:0;overflow:hidden;transition:max-height var(--dur-med) var(--ease);}
+.accordion-panel-inner{padding:0 1.5rem 1.5rem;}
+.accordion-panel-inner p{line-height:1.8;opacity:.92;margin-bottom:.8rem;}
+.accordion-panel-inner .keyfact{font-size:.92rem;padding:.85rem 1.05rem;border-radius:var(--radius-s);background:rgba(255,255,255,.06);border-left:3px solid rgba(95,233,223,.55);}
+
+/* ==========================================================================
+   10. TIMELINE — planet-hop / current-line map
+   ========================================================================== */
+.timeline{position:relative;max-width:820px;margin:0 auto;padding-left:2.4rem;}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,rgba(255,207,107,.65),rgba(255,207,107,.05));}
+.theme-whale .timeline::before,#world-whale-52hz .timeline::before{background:linear-gradient(180deg,rgba(95,233,223,.65),rgba(95,233,223,.05));}
+.timeline-node{position:relative;padding-bottom:2.3rem;}
+.timeline-node::before{content:"";position:absolute;left:-2.4rem;top:.25rem;width:16px;height:16px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#fff6da,#ffcf6b 60%,#e79c3c);box-shadow:0 0 0 5px rgba(255,207,107,.2);}
+#world-whale-52hz .timeline-node::before{background:radial-gradient(circle at 34% 30%,#e7fffd,#5fe9df 60%,#2ba9a2);box-shadow:0 0 0 5px rgba(95,233,223,.2);}
+.timeline-node button.tn-trigger{width:100%;text-align:left;background:none;border:none;color:inherit;padding:0;min-height:44px;}
+.timeline-year{font-family:var(--font-main);font-weight:600;font-weight:700;letter-spacing:.04em;opacity:.85;font-size:.85rem;}
+.timeline-node h3{font-size:1.25rem;margin:.25rem 0;}
+.timeline-node p{opacity:.82;font-size:.95rem;line-height:1.6;}
+
+/* ==========================================================================
+   11. SOUND LAB — 52Hz interactive sound signature
+   ========================================================================== */
+.soundlab{max-width:640px;margin:0 auto;text-align:center;border-radius:var(--radius-l);padding:2.6rem 1.8rem;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(8,52,64,.72),rgba(3,22,29,.88));border:1px solid rgba(95,233,223,.24);box-shadow:var(--shadow-deep);}
+.soundlab::before{
+  content:"";position:absolute;left:50%;top:50%;width:340px;height:340px;transform:translate(-50%,-50%);
+  border-radius:50%;border:2px solid rgba(95,233,223,.18);opacity:0;
+}
+.soundlab.is-playing::before{
+  animation:sonar-ring 2.4s var(--ease) infinite;
+}
+@keyframes sonar-ring{0%{width:60px;height:60px;opacity:.7;}100%{width:420px;height:420px;opacity:0;}}
+.soundlab .freq-num{font-family:var(--font-main);font-weight:600;font-weight:800;font-size:3.1rem;color:var(--whale-cyan);letter-spacing:.02em;position:relative;z-index:2;filter:drop-shadow(0 0 18px rgba(95,233,223,.35));}
+.soundlab .waveform{display:flex;align-items:flex-end;gap:3px;height:60px;justify-content:center;margin:1rem 0 1.4rem;position:relative;z-index:2;}
+.soundlab .waveform span{width:4px;background:linear-gradient(180deg,#c9fdf7,#2ba9a2);border-radius:3px;transform:scaleY(.25);transition:transform .25s ease;}
+.soundlab.is-playing .waveform span{animation:wave-bounce 1.4s ease-in-out infinite;}
+.play-btn{font-family:var(--font-main);font-weight:600;font-weight:700;border:1px solid rgba(95,233,223,.5);background:rgba(95,233,223,.12);
+  color:#e6fbf8;padding:.75em 1.7em;border-radius:999px;font-size:.95rem;display:inline-flex;align-items:center;gap:.5em;position:relative;z-index:2;min-height:44px;transition:transform var(--dur-fast) var(--ease-pop),background var(--dur-fast);}
+.play-btn:hover{background:rgba(95,233,223,.22);transform:translateY(-2px);}
+.soundlab-note{font-size:.82rem;opacity:.62;margin-top:1rem;font-style:italic;position:relative;z-index:2;}
+.soundscape-list{margin-top:2rem;text-align:left;display:grid;gap:.7rem;position:relative;z-index:2;}
+.soundscape-list .sc-item{font-size:.9rem;padding:.85rem 1.05rem;border-radius:var(--radius-s);background:rgba(255,255,255,.05);}
+.soundscape-list .sc-item b{color:var(--whale-cyan);font-family:var(--font-main);font-weight:600;font-weight:700;font-size:.78rem;display:block;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.05em;}
+
+/* ==========================================================================
+   12. COMPARISON (Prince × Whale)
+   ========================================================================== */
+.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.08);border-radius:var(--radius-m);overflow:hidden;margin-bottom:1rem;box-shadow:var(--shadow-soft);}
+.compare-col{padding:1.3rem 1.4rem;background:linear-gradient(160deg,#1a1440,#100c2c);}
+.compare-col.whale-side{background:linear-gradient(160deg,#063542,#02141b);}
+.compare-col .cc-label{font-family:var(--font-main);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;opacity:.65;margin-bottom:.5rem;}
+.compare-col p{line-height:1.65;font-size:.95rem;}
+.compare-extra{grid-column:1/-1;background:#0d0a22;padding:1.1rem 1.4rem;font-size:.9rem;line-height:1.7;opacity:.85;}
+@media(max-width:700px){.compare-row{grid-template-columns:1fr;}}
+
+/* ==========================================================================
+   13. READING CONTROLS (floating)
+   ========================================================================== */
+#reading-controls{
+  position:fixed;right:1rem;bottom:1rem;z-index:900;
+  display:flex;gap:.4rem;padding:.5rem;border-radius:999px;
+  background:rgba(12,9,26,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 12px 32px rgba(0,0,0,.45);
+}
+#reading-controls button{
+  width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);color:#fff;font-family:var(--font-main);font-weight:600;font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;transition:background var(--dur-fast),transform var(--dur-fast) var(--ease-pop);
+}
+#reading-controls button:hover{background:rgba(255,255,255,.2);transform:scale(1.06);}
+#reading-controls .rc-label{align-self:center;font-family:var(--font-main);font-weight:600;font-size:.72rem;opacity:.72;padding:0 .3rem;min-width:2.4em;text-align:center;}
+
+/* ==========================================================================
+   14. TRANSITION OVERLAY (little prince <-> whale)
+   ========================================================================== */
+#world-transition-overlay{position:fixed;inset:0;z-index:1500;pointer-events:none;opacity:0;overflow:hidden;}
+#world-transition-overlay.active{animation:transition-flash var(--dur-cinematic) var(--ease-soft);}
+@keyframes transition-flash{
+  0%{opacity:0;}
+  22%{opacity:1;}
+  78%{opacity:1;}
+  100%{opacity:0;}
+}
+/* to-whale: gold starlight collapses inward, then blooms outward as cyan deep ocean */
+#world-transition-overlay.to-whale{
+  background:radial-gradient(circle at 50% 50%,rgba(255,207,107,.55),rgba(10,7,34,.6) 40%,transparent 70%);
+  animation-name:transition-flash,portal-to-whale;
+  animation-duration:var(--dur-cinematic),var(--dur-cinematic);
+  animation-timing-function:var(--ease-soft),var(--ease-soft);
+}
+@keyframes portal-to-whale{
+  0%{background:radial-gradient(circle at 50% 50%,rgba(255,207,107,.55),rgba(10,7,34,.6) 40%,transparent 70%);}
+  35%{background:radial-gradient(circle at 50% 50%,rgba(255,236,190,.85),rgba(20,14,40,.7) 18%,transparent 45%);}
+  55%{background:radial-gradient(circle at 50% 50%,rgba(210,250,246,.85),rgba(3,30,38,.85) 25%,transparent 60%);}
+  100%{background:radial-gradient(circle at 50% 50%,rgba(95,233,223,.45),rgba(2,16,22,.97) 55%,rgba(2,16,22,.97) 100%);}
+}
+/* to-prince: cyan bubbles thin out into cosmic purple/gold starfall */
+#world-transition-overlay.to-prince{
+  background:radial-gradient(circle at 50% 50%,rgba(95,233,223,.5),rgba(2,16,22,.6) 40%,transparent 70%);
+  animation-name:transition-flash,portal-to-prince;
+  animation-duration:var(--dur-cinematic),var(--dur-cinematic);
+  animation-timing-function:var(--ease-soft),var(--ease-soft);
+}
+@keyframes portal-to-prince{
+  0%{background:radial-gradient(circle at 50% 50%,rgba(95,233,223,.5),rgba(2,16,22,.6) 40%,transparent 70%);}
+  35%{background:radial-gradient(circle at 50% 50%,rgba(220,253,250,.85),rgba(3,25,34,.7) 18%,transparent 45%);}
+  55%{background:radial-gradient(circle at 50% 50%,rgba(255,236,190,.8),rgba(24,16,50,.85) 25%,transparent 60%);}
+  100%{background:radial-gradient(circle at 50% 50%,rgba(255,207,107,.4),rgba(10,7,34,.97) 55%,rgba(10,7,34,.97) 100%);}
+}
+.transition-particle{
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation:portal-particle var(--dur-cinematic) var(--ease-soft) forwards;
+}
+@keyframes portal-particle{
+  0%{transform:translate(var(--px,0),var(--py,0)) scale(1);opacity:0;}
+  30%{opacity:1;}
+  60%{transform:translate(0,0) scale(.4);opacity:1;}
+  100%{transform:translate(calc(var(--px,0) * -1),calc(var(--py,0) * -1)) scale(0);opacity:0;}
+}
+@media(prefers-reduced-motion:reduce){
+  #world-transition-overlay.active{animation:transition-flash var(--dur-fast) linear;}
+  #world-transition-overlay.to-whale,#world-transition-overlay.to-prince{animation-name:transition-flash;}
+}
+
+/* ==========================================================================
+   15. FOOTER
+   ========================================================================== */
+footer{position:relative;z-index:2;padding:5rem 1.4rem 3.5rem;text-align:center;border-top:1px solid rgba(255,255,255,.08);}
+.footer-quote{max-width:640px;margin:0 auto 2.4rem;font-size:1.2rem;font-style:italic;line-height:1.7;opacity:.88;}
+.footer-worlds{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;max-width:820px;margin:0 auto 2.2rem;}
+.footer-worlds div{max-width:320px;}
+.footer-worlds h4{font-size:1.1rem;margin-bottom:.5rem;}
+.footer-worlds p{font-size:.92rem;line-height:1.7;opacity:.78;font-style:italic;}
+.footer-meta{font-family:var(--font-main);font-weight:600;font-size:.75rem;opacity:.52;line-height:1.8;max-width:640px;margin:0 auto;}
+
+/* ==========================================================================
+   16. MISC / UTIL
+   ========================================================================== */
+.loop-row{display:flex;gap:1rem;overflow-x:auto;padding:.5rem .2rem 1.2rem;scrollbar-width:thin;}
+.loop-item{flex:0 0 158px;text-align:center;border-radius:var(--radius-m);padding:1.5rem 1rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);transition:transform var(--dur-fast) var(--ease-pop),background var(--dur-fast);}
+.loop-item:hover{transform:translateY(-4px);background:rgba(255,255,255,.08);}
+.loop-item .em{font-size:2rem;display:block;margin-bottom:.5rem;filter:drop-shadow(0 3px 5px rgba(0,0,0,.3));}
+.loop-item .lb{font-family:var(--font-main);font-weight:600;font-size:.72rem;letter-spacing:.06em;font-weight:700;display:block;margin-bottom:.4rem;}
+.loop-item .tip{font-size:.8rem;opacity:.72;line-height:1.5;}
+
+.quote-strip{display:flex;gap:1rem;overflow-x:auto;padding:.5rem .2rem 1rem;}
+.quote-chip{flex:0 0 auto;max-width:280px;font-size:.92rem;font-style:italic;padding:1.05rem 1.25rem;border-radius:var(--radius-m);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);line-height:1.55;}
+
+.reveal{
+  opacity:0;transform:translateY(30px) scale(.985);filter:blur(8px);
+  transition:opacity .8s var(--ease-soft),transform .8s var(--ease-soft),filter .8s var(--ease-soft);
+}
+.reveal.is-visible{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;filter:none;}}
+
+/* Card cascade — when a grid reveals, its cards stagger in one after another
+   (0ms / 70ms / 140ms / 210ms, repeating every 4) instead of popping together. */
+.grid.reveal > *{opacity:0;transform:translateY(16px);}
+.grid.reveal.is-visible > *{animation:card-cascade-in .6s var(--ease-soft) both;}
+.grid.reveal.is-visible > *:nth-child(4n+1){animation-delay:0ms;}
+.grid.reveal.is-visible > *:nth-child(4n+2){animation-delay:70ms;}
+.grid.reveal.is-visible > *:nth-child(4n+3){animation-delay:140ms;}
+.grid.reveal.is-visible > *:nth-child(4n+4){animation-delay:210ms;}
+@keyframes card-cascade-in{0%{opacity:0;transform:translateY(16px);}100%{opacity:1;transform:translateY(0);}}
+@media (prefers-reduced-motion: reduce){
+  .grid.reveal > *{opacity:1;transform:none;}
+  .grid.reveal.is-visible > *{animation:none;}
+}
+
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center;}
+@media(max-width:800px){.two-col{grid-template-columns:1fr;}}
+
+.author-hero-img{border-radius:var(--radius-l);overflow:hidden;box-shadow:var(--shadow-deep);}
+
+@media(max-width:640px){
+  .section{padding:3.8rem 0;}
+  .hero{min-height:88vh;padding:5rem 1rem 3rem;}
+  .char-stage{height:300px;max-width:94vw;}
+  .char-stage .cs-prince{width:130px;height:130px;}
+  .char-stage .cs-prince::before{width:90px;height:90px;top:10px;}
+  .char-stage .cs-prince::after{top:28px;width:20px;height:26px;}
+  .char-stage .cs-fox{width:76px;height:62px;}
+  .char-stage .cs-rose{width:48px;height:58px;}
+  .char-stage .cs-planet{width:56px;height:56px;}
+  .char-stage .stage-item span{font-size:.66rem;}
+  .card{padding:1.3rem;}
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body class="theme-prince">
+<a href="#main-content" class="skip-link">Bỏ qua, đến nội dung chính</a>
+
+<div id="magic-background" aria-hidden="true">
+  <div class="bg-stars" id="bg-stars">
+    <div id="shooting-star-layer"></div>
+  </div>
+  <div class="bg-ocean" id="bg-ocean">
+    <div class="ocean-whale" aria-hidden="true"></div>
+    <div class="ocean-caustics" aria-hidden="true"></div>
+    <div class="whale-watermark" id="whale-watermark">
+      <img id="whale-watermark-img" alt="Hình minh hoạ nghệ thuật về một chú cá voi — biểu tượng thị giác cho câu chuyện về cá voi 52Hz, không phải hình ảnh xác nhận của cá thể 52Hz." loading="lazy">
+    </div>
+    <div id="plankton-layer"></div>
+  </div>
+</div>
+
+<div id="world-transition-overlay" aria-hidden="true"></div>
+
+<header class="site-header">
+  <nav id="world-switcher" aria-label="Chuyển đổi giữa hai thế giới">
+    <button type="button" class="world-tab" id="tab-prince" role="tab" aria-selected="true" aria-controls="world-little-prince" data-world="little-prince">
+      <span class="tab-em" aria-hidden="true">🌹</span>
+      <span><span class="tab-main">HOÀNG TỬ BÉ</span><span class="tab-sub">Le Petit Prince</span></span>
+    </button>
+    <button type="button" class="world-tab" id="tab-whale" role="tab" aria-selected="false" aria-controls="world-whale-52hz" data-world="whale-52hz">
+      <span class="tab-em" aria-hidden="true">🐋</span>
+      <span><span class="tab-main">CÁ VOI 52Hz</span><span class="tab-sub">The 52Hz Whale</span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="main-content">
+
+<!-- ============================== WORLD 1 — HOÀNG TỬ BÉ ============================== -->
+<section id="world-little-prince" class="world is-active" role="tabpanel" aria-labelledby="tab-prince">
+
+  <div class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img id="hero-img-prince" alt="" loading="eager">
+      <div class="overlay"></div>
+    </div>
+    <p class="hero-eyebrow">Antoine de Saint-Exupéry</p>
+    <h1 class="hero-title">Hoàng Tử Bé</h1>
+
+    <div class="char-stage" aria-hidden="true">
+      <div class="stage-item cs-prince"><img id="stage-prince-img" alt=""><span>👑 hoàng tử bé</span></div>
+      <div class="stage-item small cs-fox"><img id="stage-fox-img" alt=""><span>🦊 con cáo</span></div>
+      <div class="stage-item small cs-rose"><img id="stage-rose-img" alt=""><span>🌹 hoa hồng</span></div>
+      <div class="stage-item small cs-planet"><img id="stage-planet-img" alt=""><span>🪐 B-612</span></div>
+    </div>
+
+    <p class="hero-lede">Một câu chuyện nhỏ về một hành tinh nhỏ, nhưng chứa đựng những câu hỏi rất lớn về tình yêu, tình bạn, sự trưởng thành và cách chúng ta nhìn thế giới.</p>
+    <p class="hero-byline">✦ Antoine de Saint-Exupéry ✦</p>
+    <p class="hero-scroll-hint">Lật trang để bắt đầu</p>
+  </div>
+
+  <nav class="subnav" aria-label="Điều hướng trong Hoàng tử bé">
+    <a href="#lp-journey">🌌 Hành trình</a>
+    <a href="#lp-story">📖 Câu chuyện</a>
+    <a href="#lp-summary">✨ Tóm tắt</a>
+    <a href="#lp-meanings">🌹 Ý nghĩa</a>
+    <a href="#lp-characters">🦊 Nhân vật</a>
+    <a href="#lp-symbols">⭐ Biểu tượng</a>
+    <a href="#lp-author">✍️ Tác giả</a>
+    <a href="#lp-reflect">💭 Suy ngẫm</a>
+  </nav>
+
+  <section class="section" id="lp-journey">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Section 01</span>
+        <h2 class="section-title">🌌 Hành trình</h2>
+        <p class="section-desc">Từ bầu trời, qua bảy hành tinh, đến một sa mạc trên Trái Đất — và cuối cùng, trở lại bầu trời.</p>
+      </div>
+      <div class="loop-row reveal" id="loop-row"></div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-story">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Section 02</span>
+        <h2 class="section-title">📖 Câu chuyện / Tác phẩm</h2>
+        <p class="section-desc">Mỗi chương là một trang sách nhỏ. Chạm vào một chương để mở nó ra.</p>
+      </div>
+      <div class="grid grid-3 reveal" id="chapters-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-summary">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Section 03</span>
+        <h2 class="section-title">✨ Những khoảnh khắc đáng nhớ</h2>
+        <p class="section-desc">Vài khoảnh khắc nhỏ, nhưng lại là nơi cả câu chuyện đọng lại.</p>
+      </div>
+      <div class="grid grid-3 reveal" id="moments-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-meanings">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Section 04</span>
+        <h2 class="section-title">🌹 Những ý nghĩa</h2>
+        <p class="section-desc">Không chỉ một bài học — mà nhiều tầng ý nghĩa, mỗi tầng dành cho một người đọc khác nhau.</p>
+      </div>
+      <div class="grid grid-auto reveal" id="meanings-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-characters">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Section 05</span>
+        <h2 class="section-title">🦊 Nhân vật</h2>
+        <p class="section-desc">Mỗi nhân vật Hoàng tử bé gặp trên hành trình đều mang theo một mảnh ghép của con người.</p>
+      </div>
+      <div class="grid grid-auto reveal" id="characters-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-symbols">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Section 06</span>
+        <h2 class="section-title">⭐ Biểu tượng</h2>
+        <p class="section-desc">Những hình ảnh nhỏ mang theo cả một tầng ý nghĩa lớn.</p>
+      </div>
+      <div class="grid grid-auto reveal" id="symbols-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Hình ảnh</span>
+        <h2 class="section-title">Những hình ảnh của câu chuyện</h2>
+      </div>
+      <div class="grid grid-4 reveal" id="lp-gallery-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-author">
+    <div class="wrap">
+      <div class="two-col reveal">
+        <div>
+          <span class="section-kicker">Section 07</span>
+          <h2 class="section-title" style="margin-bottom:1rem;">✍️ Antoine de Saint-Exupéry</h2>
+          <p class="section-desc" style="text-align:left;margin-bottom:1.6rem;">Phi công, nhà văn, và người đã viết nên một trong những cuốn sách được đọc nhiều nhất thế giới — trong lúc sống lưu vong, xa quê hương.</p>
+          <div class="timeline" id="author-timeline"></div>
+        </div>
+        <div class="img-wrap author-hero-img">
+          <img id="author-img" alt="Bầu trời sao — hình ảnh minh họa cho hành trình của Saint-Exupéry" loading="lazy">
+          <div class="cap">Bầu trời sao — nơi Hoàng tử bé đã trở về</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lp-reflect">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Section 08</span>
+        <h2 class="section-title">💭 Những câu hỏi để suy ngẫm</h2>
+        <p class="section-desc">Ai cũng đọc Hoàng tử bé theo một cách khác nhau.</p>
+      </div>
+      <div class="grid grid-3 reveal" id="adultviews-grid" style="margin-bottom:2rem;"></div>
+      <div class="quote-strip reveal" id="closing-questions-strip"></div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ============================== WORLD 2 — CÁ VOI 52Hz ============================== -->
+<section id="world-whale-52hz" class="world" role="tabpanel" aria-labelledby="tab-whale" hidden>
+
+  <div class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <img id="hero-img-whale" alt="" loading="eager">
+      <div class="overlay"></div>
+    </div>
+    <p class="hero-eyebrow" id="whale-hero-eng">THE 52Hz WHALE</p>
+    <div class="hero-freq">52 Hz</div>
+    <div class="hero-waveform" aria-hidden="true">
+      <span style="animation-delay:0s"></span><span style="animation-delay:.1s"></span><span style="animation-delay:.2s"></span>
+      <span style="animation-delay:.3s"></span><span style="animation-delay:.15s"></span><span style="animation-delay:.25s"></span>
+      <span style="animation-delay:.05s"></span><span style="animation-delay:.35s"></span><span style="animation-delay:.18s"></span>
+      <span style="animation-delay:.28s"></span><span style="animation-delay:.08s"></span><span style="animation-delay:.22s"></span>
+    </div>
+    <h1 class="hero-title" id="whale-hero-title">Cá Voi 52Hz</h1>
+    <p class="hero-lede" id="whale-hero-tagline"></p>
+    <p class="hero-scroll-hint">Lặn xuống để nghe câu chuyện</p>
+  </div>
+
+  <nav class="subnav" aria-label="Điều hướng trong Cá voi 52Hz">
+    <a href="#w-overview">🌊 Tổng quan</a>
+    <a href="#w-facts">🔬 FACT</a>
+    <a href="#w-mystery">❓ Bí ẩn</a>
+    <a href="#w-journey">🗺️ Hành trình</a>
+    <a href="#w-sound">🎧 Âm thanh</a>
+    <a href="#w-stories">📖 STORY</a>
+    <a href="#w-crossover">🔗 × Hoàng tử bé</a>
+  </nav>
+
+  <section class="section" id="w-overview">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Tổng quan</span>
+        <h2 class="section-title">🌊 52Hz là gì?</h2>
+        <p class="section-desc" id="whale-shortintro"></p>
+      </div>
+      <p class="section-desc reveal" style="max-width:760px;margin:0 auto 2.4rem;font-size:.88rem;opacity:.6;font-style:italic;" id="whale-disclaimer"></p>
+      <div class="accordion" id="profile-accordion" role="presentation"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-facts">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker badge badge-fact">FACT</span>
+        <h2 class="section-title">🔬 Những gì khoa học biết</h2>
+        <p class="section-desc">Dựa trên nghiên cứu và dữ liệu hydrophone công khai — nên được đối chiếu thêm với nguồn học thuật gốc.</p>
+      </div>
+      <div class="grid grid-3 reveal" id="facts-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-mystery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Bí ẩn</span>
+        <h2 class="section-title">❓ AI ĐANG GỌI AI?</h2>
+        <p class="section-desc">Danh sách những điều khoa học chưa thể trả lời — và không nên vội trả lời thay.</p>
+      </div>
+      <div class="grid grid-2 reveal" id="mystery-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-journey">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Ocean Timeline</span>
+        <h2 class="section-title">🗺️ Hành trình</h2>
+        <p class="section-desc">Một tuyến di chuyển được suy diễn từ dữ liệu âm thanh — không phải một bản đồ được xác nhận từng ngày.</p>
+      </div>
+      <div class="timeline reveal" id="journey-timeline"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-sound">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Sound Laboratory</span>
+        <h2 class="section-title">🎧 Âm thanh</h2>
+      </div>
+      <div class="soundlab reveal" id="soundlab">
+        <div class="freq-num">52Hz</div>
+        <div class="waveform" id="soundlab-wave"></div>
+        <button type="button" class="play-btn" id="soundlab-toggle" aria-pressed="false">
+          <span id="soundlab-icon">▶</span> <span id="soundlab-label">Nghe tiếng cá voi</span>
+        </button>
+        <audio id="soundlab-audio" preload="none" src="https://www.pmel.noaa.gov/acoustics/whales/sounds/whalewav/ak52_10x.wav"></audio>
+        <p class="soundlab-note">Bản ghi âm được tăng tốc 10 lần (nguồn: NOAA PMEL Acoustics) để tai người có thể nghe được — 52Hz thật ở ngoài đời thấp hơn nhiều so với thính giác của con người.</p>
+        <div class="soundscape-list" id="soundscape-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="w-ocean-facts">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Đại dương</span>
+        <h2 class="section-title">Thế giới dưới nước</h2>
+      </div>
+      <div class="grid grid-3 reveal" id="ocean-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-stories">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker badge badge-story">STORY</span>
+        <h2 class="section-title">📖 Tám câu chuyện phiêu lưu</h2>
+        <p class="section-desc">Sáng tác lấy cảm hứng từ hiện tượng khoa học — không phải sự thật đã được xác nhận về hành vi hay cảm xúc của cá voi.</p>
+      </div>
+      <div class="grid grid-3 reveal" id="stories-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-friendship">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Nếu bạn thấy mình khác biệt</span>
+        <h2 class="section-title">💭 INTERPRETATION</h2>
+        <p class="section-desc">Vài suy ngẫm dành cho bất kỳ ai đang cảm thấy mình "khác tần số" với thế giới xung quanh.</p>
+      </div>
+      <div class="grid grid-3 reveal" id="ifyoufeel-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-crossover">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">🔗 Liên hệ</span>
+        <h2 class="section-title">Hoàng Tử Bé × Cá Voi 52Hz</h2>
+        <p class="section-desc">Không phải hai câu chuyện giống nhau — mà là hai câu chuyện có thể soi chiếu vào nhau.</p>
+      </div>
+      <div id="crossover-list" class="reveal"></div>
+    </div>
+  </section>
+
+  <section class="section" id="w-quotes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-kicker">Trích dẫn</span>
+        <h2 class="section-title">Vài dòng để mang theo</h2>
+      </div>
+      <div class="quote-strip reveal" id="whale-quote-strip"></div>
+    </div>
+  </section>
+
+</section>
+
+</main>
+
+<aside id="reading-controls" aria-label="Tuỳ chỉnh cỡ chữ">
+  <button type="button" id="font-dec" aria-label="Giảm cỡ chữ">A−</button>
+  <span class="rc-label" id="font-level-label">100%</span>
+  <button type="button" id="font-inc" aria-label="Tăng cỡ chữ">A+</button>
+</aside>
+
+<div id="global-modal-root" aria-hidden="true"></div>
+
+<footer>
+  <p class="footer-quote">Có những câu chuyện không kết thúc khi trang cuối cùng khép lại.</p>
+  <div class="footer-worlds">
+    <div>
+      <h4>🌹 Hoàng tử bé</h4>
+      <p>"Điều quan trọng nhất đôi khi không thể nhìn thấy bằng mắt."</p>
+    </div>
+    <div>
+      <h4>🐋 52Hz</h4>
+      <p>Một tiếng gọi có thể rất nhỏ giữa đại dương rộng lớn, nhưng điều đó không có nghĩa nó không đáng được lắng nghe.</p>
+    </div>
+  </div>
+  <p class="footer-meta">Thân gửi cậu: Những người bạn của tớ. Tớ đặc biệt thích câu chuyện của "Hoàng tử bé" và "Cá voi 52Hz". Hai hình ảnh tưởng chừng chẳng liên quan nhưng tớ tạo nên website này với mong muốn kết nối chúng. Tớ thích cách Hoàng tử bé đi qua các hành tinh, gặp nhiều người, trải nghiệm nhiêu (1 ý nghĩa tớ tự rút ra sau khi đọc cuốn sách), thích cái cách mà cậu bé trân trọng các mối quan hệ và dành hết "tâm" mình cho các mối quan hệ đó; tớ cũng thích Cá voi 52Hz, có lẽ không loài nào có thể giao tiếp với nó, khiến 52Hz trở thành loài cô đơn nhất thế giới, nhưng tớ tin, mỗi chúng ta rồi sẽ tìm thấy niềm vui, hạnh phúc và sự bình tâm trong cuộc sống. Thân gửi!</p>
+</footer>
+
+<script src="book-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
